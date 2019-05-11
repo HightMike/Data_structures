@@ -17,15 +17,44 @@ class ListRand
 
     public int Count;
 
+    public void addFirst(String Data) {
+
+        ListNode newNode = new ListNode();
+        newNode.Data = Data;
+
+        if (isEmpty()) { // если first = null
+            newNode.Next = null;
+            newNode.Prev = null;
+            Head = newNode;
+            Tail = newNode;
+
+        } else {
+            Head.Prev = newNode;
+            newNode.Next = Head;
+            newNode.Prev = null;
+            Head = newNode;
+        }
+    }
+
+    public boolean isEmpty() {
+        return (Head == null);
+    }
+
     public void Serialize(OutputStream s)
     {
 
         PrintWriter pr = new PrintWriter(s);
-        pr.println(this.Head.Data);
-        pr.println(this.Count);
+        ListNode listRand = Head;
+        while (listRand!=null) {
+
+            Count++;
+
+            pr.println(listRand.Data + " Под номером: " + Count);
+            listRand = listRand.Next;
+
+        }
 
         pr.flush();
-
 
     }
 
@@ -41,4 +70,7 @@ class ListRand
         }
 
     }
+
+
+
 }
