@@ -9,9 +9,9 @@ public class Main {
         String path = "/home/mike/codes/file2";
 
         ListRand listRand = new ListRand();
-        listRand.addFirst("Третий");
-        listRand.addFirst("Второй");
-        listRand.addFirst("Первый");
+        listRand.addLast("Первый");
+        listRand.addLast("Второй");
+        listRand.addLast("Третий");
 
         listRand.Head.Rand = new ListNode();
         listRand.Head.Rand.Data = "произвольный ";
@@ -19,10 +19,14 @@ public class Main {
 
         OutputStream outputStream = new FileOutputStream(path);
         listRand.Serialize(outputStream);
+
         listRand.Head = null; // обнуление списка
 
         InputStream inputStream = new FileInputStream(path);
         listRand.Deserialize(inputStream);
+
+        OutputStream outputStream2 = new FileOutputStream("/home/mike/codes/file3");
+        listRand.Serialize(outputStream2);
 
     }
 }

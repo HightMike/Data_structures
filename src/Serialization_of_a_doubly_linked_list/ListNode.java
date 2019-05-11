@@ -36,7 +36,7 @@ class ListRand
             int count=0;
             while (bufferedReader.ready()) {
                 String str = bufferedReader.readLine();
-                this.addFirst(str);
+                this.addLast(str);
                 count++;
                 System.out.println("Десериализован " + str + " элемент");
             }
@@ -47,7 +47,7 @@ class ListRand
         }
     }
 
-    public void addFirst(String Data)
+    public void addLast(String Data)
     {
         ListNode newNode = new ListNode();
         newNode.Data = Data;
@@ -59,10 +59,10 @@ class ListRand
             Tail = newNode;
 
         } else {
-            Head.Prev = newNode;
-            newNode.Next = Head;
-            newNode.Prev = null;
-            Head = newNode;
+            Tail.Next = newNode;
+            newNode.Prev = Tail;
+            newNode.Next = null;
+            Tail = newNode;
         }
     }
 
