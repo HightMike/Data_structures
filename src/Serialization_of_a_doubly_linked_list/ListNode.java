@@ -19,14 +19,14 @@ class ListRand
 
     public void Serialize(OutputStream s)
     {
-        PrintWriter pr = new PrintWriter(s);
+        PrintWriter pw = new PrintWriter(s);
         ListNode listRand = Head;
         while (listRand!=null) {
             Count++;
-            pr.println(listRand.Data);
+            pw.println(listRand.Data);
             listRand = listRand.Next;
         }
-        pr.flush();
+        pw.flush();
     }
 
     public void Deserialize(InputStream s)
