@@ -1,9 +1,8 @@
-package Serialization_of_a_doubly_linked_list;
+package Syber.serial;
 
 import java.io.*;
 
 class ListNode
-
 {
     public ListNode Prev;
     public ListNode Next;
@@ -20,19 +19,19 @@ class ListRand
     public void Serialize(OutputStream s)
     {
         PrintWriter pw = new PrintWriter(s);
-        ListNode listRand = Head;
-        while (listRand!=null) {
+        ListNode currentElement = Head;
+        while (currentElement!=null) {
             Count++;
-            pw.println(listRand.Data);
-            listRand = listRand.Next;
+            pw.println(currentElement.Data);
+            currentElement = currentElement.Next;
         }
         pw.flush();
+        pw.close();
     }
 
     public void Deserialize(InputStream s)
     {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s));
-        try {
+        try ( BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s))) {
             int count=0;
             while (bufferedReader.ready()) {
                 String str = bufferedReader.readLine();
