@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.random;
-
 class ListNode
 {
     public ListNode Prev;
@@ -42,7 +40,7 @@ class ListRand
             Count=0;
             while (bufferedReader.ready()) {
                 String str = bufferedReader.readLine();
-                String[] s1 = str.split(" -Rand- ");
+                String[] s1 = str.split(" -Rand- "); // разделяем на элемент и его rand, чтоб потом по дате восстановить
                 this.addLast(s1[0]);
                 list.add(s1[1]);
                 Count++;
