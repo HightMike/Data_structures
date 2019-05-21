@@ -2,6 +2,8 @@ package Saber.serial;
 
 import java.io.*;
 
+import static java.lang.Math.random;
+
 class ListNode
 {
     public ListNode Prev;
@@ -22,7 +24,8 @@ class ListRand
         ListNode currentElement = Head;
         while (currentElement!=null) {
             Count++;
-            pw.println(currentElement.Data);
+            pw.println(currentElement.Data + ", случайная ссылка у данного элемента: " + currentElement.Rand);
+
             currentElement = currentElement.Next;
         }
         pw.flush();
@@ -37,7 +40,7 @@ class ListRand
                 String str = bufferedReader.readLine();
                 this.addLast(str);
                 count++;
-                System.out.println("Десериализован " + str + " элемент");
+                System.out.println("Десериализован " + str);
             }
             System.out.println("Всего элементов в списке: "+count);
 
@@ -50,7 +53,6 @@ class ListRand
     {
         ListNode newNode = new ListNode();
         newNode.Data = Data;
-
         if (isEmpty()) { // если Head = null
             newNode.Next = null;
             newNode.Prev = null;
@@ -58,10 +60,22 @@ class ListRand
             Tail = newNode;
 
         } else {
-            Tail.Next = newNode;
+            Tail.Next = newNode; // раскидал ссылки
             newNode.Prev = Tail;
             newNode.Next = null;
-            Tail = newNode;
+            Tail = newNode; // переместил Tail на новый элемент
+        }
+    }
+    public void addRands() { // записываем в Rand произвольные элементы
+        ListNode currentElement1 = Head;
+        while (currentElement1!=null) { // пока не кончится список
+            ListNode currentElement2 = Head;
+            int random = (int) (Math.random()*(Count));
+            for ( int i=0; i<random; i++) { // выбираем случайный элемент
+                currentElement2  = currentElement2.Next;
+            }
+            currentElement1.Rand = currentElement2;
+            currentElement1 = currentElement1.Next;
         }
     }
 

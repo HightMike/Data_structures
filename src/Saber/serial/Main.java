@@ -12,11 +12,16 @@ public class Main {
         listRand.addLast("Первый");
         listRand.addLast("Второй");
         listRand.addLast("Третий");
+        listRand.Count=3;
 
-        // хардкодим
-        listRand.Head.Rand = new ListNode();
-        listRand.Head.Rand.Data = "произвольный ";
-        listRand.Head.Next.Next.Next = listRand.Head.Rand;
+
+
+//        // хардкодим
+//        listRand.Head.Rand = new ListNode();
+//        listRand.Head.Rand.Data = "произвольный ";
+//        listRand.Head.Next.Next.Next = listRand.Head.Rand;
+
+        listRand.addRands();
 
         OutputStream outputStream = new FileOutputStream(path);
         listRand.Serialize(outputStream);
