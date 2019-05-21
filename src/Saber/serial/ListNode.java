@@ -1,6 +1,8 @@
 package Saber.serial;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.random;
 
@@ -24,7 +26,7 @@ class ListRand
         ListNode currentElement = Head;
         while (currentElement!=null) {
             Count++;
-            pw.println(currentElement.Data + ", случайная ссылка у данного элемента: " + currentElement.Rand);
+            pw.println(currentElement.Data + " -Rand- " + currentElement.Rand.Data);
 
             currentElement = currentElement.Next;
         }
@@ -34,19 +36,25 @@ class ListRand
 
     public void Deserialize(InputStream s)
     {
+        List<String> list = new ArrayList<>();
+
         try ( BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s))) {
-            int count=0;
+            Count=0;
             while (bufferedReader.ready()) {
                 String str = bufferedReader.readLine();
-                this.addLast(str);
-                count++;
-                System.out.println("Десериализован " + str);
+                String[] s1 = str.split(" -Rand- ");
+                this.addLast(s1[0]);
+                list.add(s1[1]);
+                Count++;
+                System.out.println("Десериализован " + s1[0]);
             }
-            System.out.println("Всего элементов в списке: "+count);
+            System.out.println("Всего элементов в списке: "+Count);
 
         } catch (IOException e) {
             e.getStackTrace();
         }
+        addRandsWithData(list);
+
     }
 
     public void addLast(String Data)
@@ -76,6 +84,21 @@ class ListRand
             }
             currentElement1.Rand = currentElement2;
             currentElement1 = currentElement1.Next;
+        }
+    }
+
+    public void addRandsWithData(List<String> list) { // Определение необходимой ссылки для Rand по дате из сериализованного файла
+        ListNode currentElement = Head;
+
+        for (String data:list) {
+            ListNode currentElement1 = Head;
+            while (currentElement1!=null) {
+                if (currentElement1.Data.equals(data)) {
+                    currentElement.Rand = currentElement1;
+                }
+                currentElement1=currentElement1.Next;
+            }
+            currentElement=currentElement.Next;
         }
     }
 

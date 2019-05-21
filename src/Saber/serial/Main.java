@@ -14,14 +14,7 @@ public class Main {
         listRand.addLast("Третий");
         listRand.Count=3;
 
-
-
-//        // хардкодим
-//        listRand.Head.Rand = new ListNode();
-//        listRand.Head.Rand.Data = "произвольный ";
-//        listRand.Head.Next.Next.Next = listRand.Head.Rand;
-
-        listRand.addRands();
+        listRand.addRands(); // добавляем ссылки на произвольные элементы в Rand
 
         OutputStream outputStream = new FileOutputStream(path);
         listRand.Serialize(outputStream);
@@ -33,7 +26,7 @@ public class Main {
         listRand.Deserialize(inputStream);
         inputStream.close();
 
-        OutputStream outputStream2 = new FileOutputStream("/home/mike/codes/file3");
+        OutputStream outputStream2 = new FileOutputStream("/home/mike/codes/file3"); // еще раз сериализуем, прост.
         listRand.Serialize(outputStream2);
         outputStream2.close();
 
